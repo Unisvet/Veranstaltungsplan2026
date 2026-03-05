@@ -5,7 +5,7 @@ const EventCard = ({ event, onOpenPhotos }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="glass rounded-2xl p-6 mb-6 transition-all duration-300 hover:shadow-2xl hover:bg-white/20">
+        <div className="glass rounded-2xl p-6 mb-6 transition-all duration-300 hover:shadow-2xl hover:bg-black/60">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
                 <div className="flex-1">
                     <div className="flex items-center gap-2 text-sm font-medium text-white/80 mb-2">
