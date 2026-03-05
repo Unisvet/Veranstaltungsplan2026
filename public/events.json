@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "date": "28. März 2026",
+        "title": "Frühjahrsputz",
+        "time": "09:30 - 12:00 Uhr",
+        "location": "Treffpunkt: Dorfplatz",
+        "shortDescription": "Gemeinsames Aufräumen im Dorf für einen frischen Start ins Frühjahr."
+    },
+    {
+        "id": 2,
+        "date": "04. April 2026",
+        "title": "Osterfeuer",
+        "time": "20:00 Uhr",
+        "location": "Kuhweide am Feuerlöschteich",
+        "shortDescription": "Traditionelles Osterfeuer für Jung und Alt mit Getränken und kleinen Snacks."
+    },
+    {
+        "id": 3,
+        "date": "20. Juni 2026",
+        "title": "Sommernachtsball",
+        "time": "Uhrzeit folgt",
+        "location": "Treffpunkt folgt",
+        "shortDescription": "Ein stimmungsvoller Abend mit Musik und Tanz zur Sommersonnenwende."
+    },
+    {
+        "id": 4,
+        "date": "03. Okt. 2026",
+        "title": "Oktober-/Drachenfest",
+        "time": "ab 13:00 Uhr",
+        "location": "Sport-/Spielplatz/Backofen",
+        "shortDescription": "Buntes Familienfest mit Drachensteigen und herbstlichen Leckereien aus dem Backofen."
+    },
+    {
+        "id": 5,
+        "date": "Nov. 2026 (Datum folgt)",
+        "title": "Stollenbacken",
+        "time": "Details folgen",
+        "location": "Details folgen",
+        "shortDescription": "Gemeinsames Stollenbacken nach traditionellem Rezept als Vorbereitung auf die Adventszeit."
+    },
+    {
+        "id": 6,
+        "date": "04. Dez. 2026",
+        "title": "Anglühen",
+        "time": "ab 18:00 Uhr",
+        "location": "Dorfplatz am Weihnachtsbaum",
+        "shortDescription": "Gemütliches Einläuten der Weihnachtszeit mit Glühwein und festlicher Stimmung."
+    },
+    {
+        "id": 7,
+        "date": "Dez. 2026 (Datum folgt)",
+        "title": "Weihnachtsfeier",
+        "time": "Details folgen",
+        "location": "Details folgen",
+        "shortDescription": "Der krönende Abschluss des Jahres mit unserer traditionellen Weihnachtsfeier."
+    }
+]
