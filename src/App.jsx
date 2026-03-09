@@ -6,16 +6,15 @@ import { Leaf, Sun, CloudRain, Snowflake } from 'lucide-react';
 function App() {
   const [events, setEvents] = useState([]);
   const [selectedEventForPhotos, setSelectedEventForPhotos] = useState(null);
-  const [season, setSeason] = useState('spring');
+  const [season, setSeason] = useState(() => {
+    const month = new Date().getMonth();
+    if (month >= 2 && month <= 4) return 'spring';
+    if (month >= 5 && month <= 7) return 'summer';
+    if (month >= 8 && month <= 10) return 'autumn';
+    return 'winter';
+  });
 
   useEffect(() => {
-    // Determine initial season based on current month
-    const month = new Date().getMonth();
-    if (month >= 2 && month <= 4) setSeason('spring');
-    else if (month >= 5 && month <= 7) setSeason('summer');
-    else if (month >= 8 && month <= 10) setSeason('autumn');
-    else setSeason('winter');
-
     // Fetch event data from the purely static JSON file
     fetch('./events.json')
       .then(res => res.json())
