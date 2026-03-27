@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { X, Upload, CheckCircle, Image as ImageIcon } from 'lucide-react';
+import { X, Upload, CheckCircle, Image as ImageIcon, Download, ExternalLink } from 'lucide-react';
 
 const PhotoModal = ({ event, onClose }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [uploadedPhotos, setUploadedPhotos] = useState([]);
+    const [uploadedPhotos, setUploadedPhotos] = useState(event.images || []);
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
     const fileInputRef = useRef(null);
 
     const handleDragOver = (e) => {
@@ -72,6 +73,16 @@ const PhotoModal = ({ event, onClose }) => {
         }, 3000);
     };
 
+    const handleDownload = (e, url) => {
+        e.stopPropagation();
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = url.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
             <div
@@ -85,12 +96,14 @@ const PhotoModal = ({ event, onClose }) => {
                         <h2 className="text-2xl font-bold text-white">Fotos: {event.title}</h2>
                         <p className="text-white/60 text-sm mt-1">{event.date} • {event.location}</p>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/70 hover:text-white"
-                    >
-                        <X size={24} />
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={onClose}
+                            className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/70 hover:text-white"
+                        >
+                            <X size={24} />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-8">
@@ -156,9 +169,16 @@ const PhotoModal = ({ event, onClose }) => {
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {uploadedPhotos.map((url, i) => (
-                                    <div key={i} className="bg-white p-3 pb-12 rounded-lg shadow-xl shadow-black/20 transform hover:scale-105 hover:-rotate-1 transition-all duration-300">
+                                    <div
+                                        key={url + i}
+                                        className="bg-white p-3 pb-12 rounded-lg shadow-xl shadow-black/20 transform hover:scale-105 hover:-rotate-1 transition-all duration-300 cursor-pointer group relative"
+                                        onClick={() => setSelectedPhoto(url)}
+                                    >
                                         <div className="aspect-square bg-slate-100 rounded overflow-hidden">
                                             <img src={url} alt={`Hochgeladenes Foto ${i + 1}`} className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 rounded-lg">
+                                            <ExternalLink size={32} className="text-white drop-shadow-lg" />
                                         </div>
                                     </div>
                                 ))}
@@ -168,6 +188,39 @@ const PhotoModal = ({ event, onClose }) => {
 
                 </div>
             </div>
+
+            {/* Enlarged Photo Overlay */}
+            {selectedPhoto && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-10 animate-in fade-in duration-300">
+                    <div
+                        className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                        onClick={() => setSelectedPhoto(null)}
+                    />
+                    <div className="relative max-w-full max-h-full flex flex-col items-center gap-4">
+                        <img
+                            src={selectedPhoto}
+                            alt="Vergrößertes Foto"
+                            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl border border-white/10"
+                        />
+                        <div className="flex gap-4">
+                            <button
+                                onClick={(e) => handleDownload(e, selectedPhoto)}
+                                className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-white/90 transition-all shadow-xl"
+                            >
+                                <Download size={20} />
+                                Bild herunterladen
+                            </button>
+                            <button
+                                onClick={() => setSelectedPhoto(null)}
+                                className="flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full font-bold hover:bg-white/20 transition-all border border-white/20 backdrop-blur-md"
+                            >
+                                <X size={20} />
+                                Schließen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
