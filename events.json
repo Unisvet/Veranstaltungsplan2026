@@ -1,5 +1,17 @@
 [
     {
+        "id": 8,
+        "date": "07. März 2026",
+        "title": "Zempern",
+        "time": "09:30 - 12:00 Uhr",
+        "location": "Treffpunkt: Dorfplatz",
+        "shortDescription": "Traditionelles Zempern durch das Dorf.",
+        "images": [
+            "images/zempern2026-03-07.jpeg",
+            "images/klingmuehl2026-03-07.jpeg"
+        ]
+    },
+    {
         "id": 1,
         "date": "28. März 2026",
         "title": "Frühjahrsputz",
