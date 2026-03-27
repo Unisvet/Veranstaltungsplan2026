@@ -39,11 +39,14 @@ function App() {
             <SeasonButton icon={<Snowflake size={16} />} label="Winter" active={season === 'winter'} onClick={() => setSeason('winter')} />
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-md">
-            Veranstaltungsplan <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">2026</span>
-          </h1>
+          <div className="flex flex-col items-center justify-center gap-4 mb-6">
+            <img src="/favicon.png" alt="Klingmühl Paradise Logo" className="w-20 h-20 drop-shadow-2xl rounded-2xl border-2 border-white/20 p-2 glass" />
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-md">
+              Klingmühl <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Paradise</span>
+            </h1>
+          </div>
           <p className="text-xl text-white/80 max-w-2xl mx-auto font-medium shadow-sm glass inline-block px-6 py-2 rounded-full">
-            Klingmühl lebt zusammen! Unser Dorfkalender für das kommende Jahr.
+            Veranstaltungsplan 2026 – Unser Dorfkalender für das kommende Jahr.
           </p>
         </header>
 
