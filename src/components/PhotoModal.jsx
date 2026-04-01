@@ -1,13 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { X, Upload, CheckCircle, Image as ImageIcon, Download, ExternalLink } from 'lucide-react';
 
-const PhotoModal = ({ event, onClose }) => {
+const PhotoModal = ({ event, onClose, onUpload }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isSuccess, setIsSuccess] = useState(false);
     const [uploadedPhotos, setUploadedPhotos] = useState(event.images || []);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const fileInputRef = useRef(null);
+
+    // Sync newly uploaded photos back if the parent updates them
+    React.useEffect(() => {
+        setUploadedPhotos(event.images || []);
+    }, [event.images]);
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -58,7 +63,13 @@ const PhotoModal = ({ event, onClose }) => {
 
         // Convert to local object URLs to display immediately (Mocking the process)
         const newPhotos = files.map(file => URL.createObjectURL(file));
-        setUploadedPhotos(prev => [...prev, ...newPhotos]);
+        
+        // Pass to parent or update local state if no parent handler
+        if (onUpload) {
+            onUpload(newPhotos);
+        } else {
+            setUploadedPhotos(prev => [...prev, ...newPhotos]);
+        }
 
         // IMPORTANT NOTE FOR BACKEND MIGRATION:
         // When moving to Google Cloud Run, replace the above logic with an API call:

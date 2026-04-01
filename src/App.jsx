@@ -14,9 +14,22 @@ function App() {
     return 'winter';
   });
 
+  const handlePhotoUpload = (eventId, newPhotos) => {
+    setEvents(prevEvents => prevEvents.map(evt => {
+      if (evt.id === eventId) {
+        const updatedEvent = { ...evt, images: [...(evt.images || []), ...newPhotos] };
+        if (selectedEventForPhotos && selectedEventForPhotos.id === eventId) {
+          setSelectedEventForPhotos(updatedEvent);
+        }
+        return updatedEvent;
+      }
+      return evt;
+    }));
+  };
+
   useEffect(() => {
     // Fetch event data from the purely static JSON file
-    fetch('./events.json')
+    fetch(`${import.meta.env.BASE_URL}events.json`)
       .then(res => res.json())
       .then(data => setEvents(data))
       .catch(err => console.error("Fehler beim Laden der events.json:", err));
@@ -40,7 +53,7 @@ function App() {
           </div>
 
           <div className="flex flex-col items-center justify-center gap-4 mb-6">
-            <img src="favicon.png" alt="Klingmühl Paradise Logo" className="w-20 h-20 drop-shadow-2xl rounded-2xl border-2 border-white/20 p-2 glass" />
+            <img src={`${import.meta.env.BASE_URL}favicon.png`} alt="Klingmühl Paradise Logo" className="w-20 h-20 drop-shadow-2xl rounded-2xl border-2 border-white/20 p-2 glass" />
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-md">
               Klingmühl <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Paradise</span>
             </h1>
@@ -77,6 +90,7 @@ function App() {
         <PhotoModal
           event={selectedEventForPhotos}
           onClose={() => setSelectedEventForPhotos(null)}
+          onUpload={(newPhotos) => handlePhotoUpload(selectedEventForPhotos.id, newPhotos)}
         />
       )}
     </div>
