@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { X, Upload, CheckCircle, Image as ImageIcon, Download, ExternalLink } from 'lucide-react';
+import { X, Upload, CheckCircle, Image as ImageIcon, Download, ExternalLink, Trash2 } from 'lucide-react';
 
-const PhotoModal = ({ event, onClose, onUpload }) => {
+const PhotoModal = ({ event, onClose, onUpload, onDelete }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -45,15 +45,16 @@ const PhotoModal = ({ event, onClose, onUpload }) => {
         setIsSuccess(false);
         setUploadProgress(0);
 
+        let progress = 0;
         const interval = setInterval(() => {
-            setUploadProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    finishUpload(imageFiles);
-                    return 100;
-                }
-                return prev + 10;
-            });
+            progress += 10;
+            if (progress >= 100) {
+                clearInterval(interval);
+                setUploadProgress(100);
+                finishUpload(imageFiles);
+            } else {
+                setUploadProgress(progress);
+            }
         }, 200);
     };
 
@@ -92,6 +93,17 @@ const PhotoModal = ({ event, onClose, onUpload }) => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    };
+
+    const handleDelete = (url) => {
+        if (window.confirm('Möchten Sie dieses Foto wirklich löschen?')) {
+            if (onDelete) {
+                onDelete(url);
+            } else {
+                setUploadedPhotos(prev => prev.filter(p => p !== url));
+            }
+            setSelectedPhoto(null);
+        }
     };
 
     return (
@@ -220,6 +232,13 @@ const PhotoModal = ({ event, onClose, onUpload }) => {
                             >
                                 <Download size={20} />
                                 Bild herunterladen
+                            </button>
+                            <button
+                                onClick={() => handleDelete(selectedPhoto)}
+                                className="flex items-center gap-2 px-6 py-3 bg-red-500/80 text-white rounded-full font-bold hover:bg-red-500 transition-all shadow-xl backdrop-blur-md"
+                            >
+                                <Trash2 size={20} />
+                                Löschen
                             </button>
                             <button
                                 onClick={() => setSelectedPhoto(null)}

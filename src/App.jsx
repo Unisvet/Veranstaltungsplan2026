@@ -27,6 +27,19 @@ function App() {
     }));
   };
 
+  const handlePhotoDelete = (eventId, photoUrl) => {
+    setEvents(prevEvents => prevEvents.map(evt => {
+      if (evt.id === eventId) {
+        const updatedEvent = { ...evt, images: (evt.images || []).filter(url => url !== photoUrl) };
+        if (selectedEventForPhotos && selectedEventForPhotos.id === eventId) {
+          setSelectedEventForPhotos(updatedEvent);
+        }
+        return updatedEvent;
+      }
+      return evt;
+    }));
+  };
+
   useEffect(() => {
     // Fetch event data from the purely static JSON file
     fetch(`${import.meta.env.BASE_URL}events.json`)
@@ -91,6 +104,7 @@ function App() {
           event={selectedEventForPhotos}
           onClose={() => setSelectedEventForPhotos(null)}
           onUpload={(newPhotos) => handlePhotoUpload(selectedEventForPhotos.id, newPhotos)}
+          onDelete={(url) => handlePhotoDelete(selectedEventForPhotos.id, url)}
         />
       )}
     </div>
