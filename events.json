@@ -31,7 +31,12 @@
         "title": "Osterfeuer",
         "time": "20:00 Uhr",
         "location": "Kuhweide am Feuerlöschteich",
-        "shortDescription": "Traditionelles Osterfeuer für Jung und Alt mit Getränken und kleinen Snacks."
+        "shortDescription": "Traditionelles Osterfeuer für Jung und Alt mit Getränken und kleinen Snacks.",
+        "images": [
+            "images/osterfeuer-1.jpg",
+            "images/osterfeuer-2.jpg",
+            "images/osterfeuer-3.jpg"
+        ]
     },
     {
         "id": 3,
