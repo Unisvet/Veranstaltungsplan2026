@@ -17,7 +17,13 @@
         "title": "Frühjahrsputz",
         "time": "09:30 - 12:00 Uhr",
         "location": "Treffpunkt: Dorfplatz",
-        "shortDescription": "Gemeinsames Aufräumen im Dorf für einen frischen Start ins Frühjahr."
+        "shortDescription": "Gemeinsames Aufräumen im Dorf für einen frischen Start ins Frühjahr.",
+        "images": [
+            "images/dorfputz-1.jpg",
+            "images/dorfputz-2.jpg",
+            "images/dorfputz-3.jpg",
+            "images/dorfputz-4.jpg"
+        ]
     },
     {
         "id": 2,
