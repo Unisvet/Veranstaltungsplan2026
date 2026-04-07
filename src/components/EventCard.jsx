@@ -36,7 +36,7 @@ const EventCard = ({ event, onOpenPhotos }) => {
                         className="flex items-center gap-2 bg-white/10 hover:bg-white/30 transition-colors border border-white/30 px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-md"
                     >
                         <ImageIcon size={16} />
-                        Fotos ansehen / hinzufügen
+                        Fotos ansehen / runterladen
                     </button>
 
                     <button className="text-white/70 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-colors">

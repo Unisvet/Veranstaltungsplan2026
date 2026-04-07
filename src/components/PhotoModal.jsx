@@ -64,7 +64,7 @@ const PhotoModal = ({ event, onClose, onUpload, onDelete }) => {
 
         // Convert to local object URLs to display immediately (Mocking the process)
         const newPhotos = files.map(file => URL.createObjectURL(file));
-        
+
         // Pass to parent or update local state if no parent handler
         if (onUpload) {
             onUpload(newPhotos);
@@ -171,7 +171,7 @@ const PhotoModal = ({ event, onClose, onUpload, onDelete }) => {
                             ) : (
                                 <>
                                     <Upload size={48} className="text-white/50 mb-4" />
-                                    <p className="text-lg font-medium text-white/90">Dateien hierher ziehen oder klicken</p>
+                                    <p className="text-lg font-medium text-white/90">Senden Sie uns die Fotos und wir laden sie hoch!</p>
                                     <p className="text-sm text-white/50 mt-2">JPG, PNG (max. 10MB pro Bild)</p>
                                 </>
                             )}
@@ -187,7 +187,7 @@ const PhotoModal = ({ event, onClose, onUpload, onDelete }) => {
 
                         {uploadedPhotos.length === 0 ? (
                             <div className="text-center py-12 bg-white/5 rounded-2xl border border-white/10">
-                                <p className="text-white/50">Noch keine Fotos vorhanden. Lade das erste hoch!</p>
+                                <p className="text-white/50">Noch keine Fotos vorhanden!</p>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
